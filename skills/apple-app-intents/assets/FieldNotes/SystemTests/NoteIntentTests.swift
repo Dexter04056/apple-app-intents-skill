@@ -5,6 +5,12 @@ import XCTest
 /// Run against a disposable FieldNotes installation with matching signing teams.
 /// This intentionally imports no application module.
 final class NoteIntentTests: XCTestCase {
+    @MainActor
+    override func setUp() async throws {
+        continueAfterFailure = false
+        XCUIApplication().launch()
+    }
+
     func testCreateRenameAndResolveThroughSystem() async throws {
         let definitions = IntentDefinitions(bundleIdentifier: "org.example.FieldNotes")
         let uniqueName = "FieldNotesIntegration-\(UUID().uuidString)"

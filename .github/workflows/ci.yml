@@ -29,13 +29,13 @@ jobs:
       - run: swift test
       - run: brew install xcodegen
       - run: xcodegen generate
-      - name: Build app and extract App Intents metadata
+      - name: Build app, extract metadata, and compile system tests
         run: |
           set -o pipefail
           xcodebuild -project FieldNotes.xcodeproj -scheme FieldNotes \
             -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath "$RUNNER_TEMP/FieldNotesDerivedData" \
-            CODE_SIGNING_ALLOWED=NO build 2>&1 | tee "$RUNNER_TEMP/fieldnotes-build.log"
+            CODE_SIGNING_ALLOWED=NO build-for-testing 2>&1 | tee "$RUNNER_TEMP/fieldnotes-build.log"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

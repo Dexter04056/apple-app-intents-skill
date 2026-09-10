@@ -7,7 +7,6 @@ import Observation
 actor NotesService {
     static let shared = NotesService()
     let store: NoteStore
-    private let index = CSSearchableIndex(name: "FieldNotes.notes")
     private(set) var indexNeedsRepair = false
     private var lastIndexJob: Task<Void, Error>?
     private var indexGeneration = UUID()
@@ -59,6 +58,9 @@ actor NotesService {
 
     private func performIndexRebuild() async throws {
         let entities = try await store.all().map(NoteEntity.init)
+        // Keep the non-Sendable index local to this serialized job. Sharing an
+        // actor property with its concurrent async API violates Swift 6 isolation.
+        let index = CSSearchableIndex(name: "FieldNotes.notes")
         try await index.deleteAllSearchableItems()
         try await index.indexAppEntities(entities)
     }

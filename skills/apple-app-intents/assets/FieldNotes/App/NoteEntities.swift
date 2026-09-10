@@ -9,6 +9,10 @@ struct LocalAccount {
     let id: String
     var name: String
     var displayRepresentation: DisplayRepresentation { .init(title: "\(name)") }
+    init(id: String, name: String) {
+        self.id = id
+        self.name = name
+    }
     static var local: Self { Self(id: "local", name: "On this device") }
 }
 
@@ -28,6 +32,10 @@ struct InboxEntity {
     var parentFolder: InboxEntity? { nil }
     var account: LocalAccount? { .local }
     var displayRepresentation: DisplayRepresentation { .init(title: "\(name)") }
+    init(id: String, name: String) {
+        self.id = id
+        self.name = name
+    }
     static var inbox: Self { Self(id: "inbox", name: "Inbox") }
 }
 
