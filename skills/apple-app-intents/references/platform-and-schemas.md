@@ -30,6 +30,16 @@ Read completeness requirements for [Mail](https://developer.apple.com/documentat
 
 ## Availability and migration
 
+Use this conservative routing table when an app must keep an older toolchain. It is not a claim that the bundled OS 27 example compiles with that toolchain.
+
+| Selected toolchain / SDK | Starting point | Keep out of that source target |
+|---|---|---|
+| Xcode 16 / iOS 18 SDK | Custom `AppIntent`, `AppEntity`, queries, `AppShortcutsProvider`; `openAppWhenRun` for legacy foreground behavior. Adopt only schemas actually present in this SDK. | Current OS 27 Notes shapes, `supportedModes`, and `AppIntentsTesting` |
+| Xcode 26 / iOS 26 SDK | Existing intent contracts plus `supportedModes` where available; inspect that SDK's schema declarations. | OS 27-only schema fields, `EntityCollection`, and `AppIntentsTesting` |
+| Xcode 27 / iOS 27 SDK | Current App Schema templates and the bundled example; use availability and a compatible source layout for older deployment targets. | Any assumption that a newer compiler makes a newer API run on an older OS |
+
+For an older SDK, consult its generated Swift interface and compile the **actual app target with that Xcode version**. Checking Swift 5 language mode with a newer SDK does not establish iOS 18 API compatibility. This project does not yet ship an independently compiled Xcode 16 legacy sample. Preserve working legacy intents while adding newer adapters in separate source/targets if necessary.
+
 - The framework began with iOS 16. Individual APIs were added later; inspect each symbol rather than assigning one minimum version to the whole integration.
 - Older material uses `AssistantSchema`. The current SDK uses `AppSchema` and contains compatibility names. Use the terminology and spellings in the selected SDK.
 - `supportedModes` is the modern execution-mode API (OS 26-era SDKs). Older targets may need `openAppWhenRun` or a compatible implementation. Do not remove working legacy support without a migration plan.

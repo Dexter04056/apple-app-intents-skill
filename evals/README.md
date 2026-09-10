@@ -2,6 +2,8 @@
 
 These are reproducible **behavioral evaluation prompts**, not claims of universal model performance. Run in a disposable workspace with synthetic data. Give an agent the installed skill and the prompt; withhold the rubric until judging. Record agent/version, skill commit, available tools/SDK, output artifacts, commands, and remaining gaps. Do not publish private agent transcripts.
 
+See [recorded results](RESULTS.md) for the scope and limitations of the independent trial performed during authoring.
+
 ## Case 1: New notes app
 
 > Use apple-app-intents to create a small local note-taking app for iOS 27. Siri should create and rename notes; Shortcuts should open a chosen note. Support same-name notes, saved data after restart, and search. Implement a working vertical slice and report exactly what you tested. Do not publish it or change signing accounts.

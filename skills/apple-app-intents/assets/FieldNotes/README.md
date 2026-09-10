@@ -14,7 +14,7 @@ An original small SwiftUI example for the Apple App Intents skill. The app targe
 | Delete | Confirmed in-app deletion and search-index reconciliation |
 | Repair search | Explicit repair UI and rebuild at launch |
 
-This is a **plain text, single-account, single-Inbox demo**. Richly attributed text, nonempty attachments, and foreign folders are rejected before mutation. The create/update schemas include those fields because the contract requires them; unsupported inputs do not become successful no-ops. The Notes update schema does not contain a content parameter, and this example does not invent one. Delete and open are not represented as nonexistent Notes-domain CRUD schemas.
+This is a **plain text, single-account, single-Inbox demo**. Richly attributed text, nonempty attachments, foreign folders, and explicitly clearing the required name/pin state/Inbox are rejected before mutation. Omitted update fields remain unchanged; clearing attachments is valid because the store has none. The create/update schemas include those fields because the contract requires them; unsupported inputs do not become successful no-ops. The Notes update schema does not contain a content parameter, and this example does not invent one. Delete and open are not represented as nonexistent Notes-domain CRUD schemas.
 
 The file store is owned by one app process. It is not a multiprocess database or cloud-sync implementation. Do not add an extension reading the same file without replacing it with coordinated storage. The sample uses a small local dataset; serialized full index rebuilds after mutations are intentionally simple and unsuitable for a large catalog. Failed indexing leaves saved data intact and a repair state; launch also rebuilds the index.
 

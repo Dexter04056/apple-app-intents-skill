@@ -40,6 +40,12 @@ struct UpdateNoteIntent {
     var folder: InboxEntity?
 
     func perform() async throws -> some ReturnsValue<NoteEntity> {
+        // Unset means unchanged; an explicit nil means clear the property.
+        // This store requires a name, a pin state, and the single Inbox folder.
+        if case .set(nil) = $name.valueState { throw NoteError.unsupportedInput }
+        if case .set(nil) = $isPinned.valueState { throw NoteError.unsupportedInput }
+        if case .set(nil) = $folder.valueState { throw NoteError.unsupportedInput }
+        // Clearing attachments is valid: this plain-text store has none.
         guard attachments == nil || attachments?.isEmpty == true,
               folder == nil || folder?.id == "inbox" else { throw NoteError.unsupportedInput }
         let note = try await NotesService.shared.update(id: target.id, name: try name.map(plainText), pinned: isPinned)
