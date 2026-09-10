@@ -1,6 +1,24 @@
 # Validation scope
 
-This page distinguishes reproducible checks from verification that requires Apple tooling and an eligible device. Current command outcomes are recorded below before release; CI is visible in the repository's Actions tab.
+This page distinguishes reproducible checks from verification that requires Apple tooling and an eligible device. The following evidence was recorded on **2026-09-10**, with final sample source at commit [`7f99b15`](https://github.com/Sdefendre/apple-app-intents-skill/commit/7f99b15a9e07a9dd45e40e54af25282816cc76d3).
+
+## Recorded results
+
+| Gate | Result and limit |
+|---|---|
+| Skill structure and bundled license | Passed repository validator; the local Codex skill-creator validator also passed |
+| Installer and environment helper | All 7 Python behavioral tests passed, including preservation and unsafe-path cases |
+| Swift persistence service | All 4 Swift Testing tests passed in Xcode 27 CI; durable writes, reopening, identity, duplicates, deletion, validation, and write failures covered |
+| iOS application and metadata | Xcode 27 beta 6, iOS 27 simulator SDK: `build-for-testing` passed and `ExtractAppIntentsMetadata` ran for the app |
+| System-test target | Compiled successfully with AppIntentsTesting, including create/rename/query and active-UI assertion; **not executed** |
+| Independent agent trial | One older-SDK/unmatched-domain case completed; [observations and limits](../evals/RESULTS.md) |
+| Device and system experience | Siri, Shortcuts execution, Spotlight results, onscreen resolution, and cross-app behavior **not device-verified** |
+
+The [source validation run](https://github.com/Sdefendre/apple-app-intents-skill/actions/runs/34439898647) includes both passing jobs and an uploaded build log. It is an unsigned simulator build, not a signed device installation. Check the [current workflow](https://github.com/Sdefendre/apple-app-intents-skill/actions/workflows/ci.yml) for subsequent commits.
+
+A separate local compiled service harness exercised durable operations and rejected a deliberately broken ID resolver. A disposable-copy installer test also failed when file copying was replaced with an empty directory creation. These mutation checks confirmed that those behavioral checks detect the corresponding defects; they are not a comprehensive mutation score.
+
+Read-only review and actual compiler diagnostics prompted fixes for macro-generated property initialization, Swift isolation of the search index, ordered index rebuilds, explicit clearing versus omitted update parameters, launching the system-test app, and visible UI refresh after intent mutations. The passing build includes those fixes. None of these source checks are substituted for device acceptance.
 
 ## Reproduce package checks
 
