@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.pyc
+.build/
+.swiftpm/
+DerivedData/
+*.xcresult/
+*.xcodeproj/
+dist/
+.venv/

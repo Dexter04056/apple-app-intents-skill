@@ -1,0 +1,44 @@
+name: Validate skill and example
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  skill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 scripts/validate.py
+      - run: python3 -m unittest discover -s tests -v
+  ios-build:
+    # Apple's OS 27 schema macros require Xcode 27. GitHub's preview image
+    # is documented at actions/runner-images issue 14404; never silently skip.
+    runs-on: xcode-27
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: skills/apple-app-intents/assets/FieldNotes
+    steps:
+      - uses: actions/checkout@v4
+      - run: xcodebuild -version
+      - run: swift test
+      - run: brew install xcodegen
+      - run: xcodegen generate
+      - name: Build app and extract App Intents metadata
+        run: |
+          set -o pipefail
+          xcodebuild -project FieldNotes.xcodeproj -scheme FieldNotes \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/FieldNotesDerivedData" \
+            CODE_SIGNING_ALLOWED=NO build 2>&1 | tee "$RUNNER_TEMP/fieldnotes-build.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fieldnotes-build-log
+          path: ${{ runner.temp }}/fieldnotes-build.log
+          if-no-files-found: ignore

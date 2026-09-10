@@ -1,0 +1,45 @@
+name: FieldNotes
+options:
+  bundleIdPrefix: org.example
+  deploymentTarget:
+    iOS: "27.0"
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+targets:
+  FieldNotes:
+    type: application
+    platform: iOS
+    sources:
+      - Sources/FieldNotesCore
+      - App
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: org.example.FieldNotes
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: FieldNotes
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        TARGETED_DEVICE_FAMILY: "1,2"
+        CODE_SIGN_STYLE: Automatic
+  FieldNotesSystemTests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - SystemTests
+    dependencies:
+      - target: FieldNotes
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: org.example.FieldNotes.SystemTests
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_STYLE: Automatic
+schemes:
+  FieldNotes:
+    build:
+      targets:
+        FieldNotes: all
+    test:
+      targets:
+        - FieldNotesSystemTests
