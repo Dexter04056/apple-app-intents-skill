@@ -32,5 +32,8 @@ final class NoteIntentTests: XCTestCase {
         XCTAssertEqual(matches.count, 1)
         let matchedName: AttributedString = try matches[0].name
         XCTAssertEqual(String(matchedName.characters), renamed)
+        // A system mutation must update the already-active app's visible list.
+        let visibleName = await MainActor.run { XCUIApplication().staticTexts[renamed].waitForExistence(timeout: 5) }
+        XCTAssertTrue(visibleName)
     }
 }

@@ -13,6 +13,7 @@ An original small SwiftUI example for the Apple App Intents skill. The app targe
 | Onscreen context | Persistent entity identifiers on rows and detail view |
 | Delete | Confirmed in-app deletion and search-index reconciliation |
 | Repair search | Explicit repair UI and rebuild at launch |
+| Refresh active UI | Observable commit notifications shared by UI and intent mutations |
 
 This is a **plain text, single-account, single-Inbox demo**. Richly attributed text, nonempty attachments, foreign folders, and explicitly clearing the required name/pin state/Inbox are rejected before mutation. Omitted update fields remain unchanged; clearing attachments is valid because the store has none. The create/update schemas include those fields because the contract requires them; unsupported inputs do not become successful no-ops. The Notes update schema does not contain a content parameter, and this example does not invent one. Delete and open are not represented as nonexistent Notes-domain CRUD schemas.
 

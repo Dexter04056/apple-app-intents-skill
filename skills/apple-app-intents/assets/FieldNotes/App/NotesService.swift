@@ -19,12 +19,14 @@ actor NotesService {
     func create(name: String, content: String, pinned: Bool) async throws -> Note {
         let note = try await store.create(name: name, content: content, pinned: pinned)
         await repairAfterMutation()
+        await NoteChanges.shared.committed()
         return note
     }
 
     func update(id: UUID, name: String?, pinned: Bool?) async throws -> Note {
         let note = try await store.update(id: id, name: name, pinned: pinned)
         await repairAfterMutation()
+        await NoteChanges.shared.committed()
         return note
     }
 
@@ -33,6 +35,7 @@ actor NotesService {
         // For this tiny local store, rebuilding reconciles deletions without assuming
         // Core Spotlight's generated entity identifier format equals UUID.uuidString.
         await repairAfterMutation()
+        await NoteChanges.shared.committed()
     }
 
     private func repairAfterMutation() async {
@@ -64,6 +67,14 @@ actor NotesService {
         try await index.deleteAllSearchableItems()
         try await index.indexAppEntities(entities)
     }
+}
+
+@available(iOS 27.0, macOS 27.0, *)
+@MainActor @Observable
+final class NoteChanges {
+    static let shared = NoteChanges()
+    private(set) var revision = UUID()
+    func committed() { revision = UUID() }
 }
 
 @available(iOS 27.0, macOS 27.0, *)

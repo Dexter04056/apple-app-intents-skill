@@ -52,6 +52,7 @@ struct NotesView: View {
             .navigationDestination(for: UUID.self) { id in NoteDetail(id: id) }
             .task { await refresh(); await repair() }
             .onChange(of: route.path) { _, _ in Task { await refresh() } }
+            .onChange(of: NoteChanges.shared.revision) { _, _ in Task { await refresh() } }
             .onChange(of: scenePhase) { _, phase in if phase == .active { Task { await refresh() } } }
             .alert("FieldNotes", isPresented: Binding(get: { error != nil }, set: { if !$0 { error = nil } })) {
                 Button("OK") { error = nil }
@@ -96,6 +97,7 @@ struct NoteDetail: View {
         }
         .appEntityIdentifier(EntityIdentifier(for: NoteEntity.self, identifier: id))
         .task(id: id) { await load() }
+        .onChange(of: NoteChanges.shared.revision) { _, _ in Task { await load() } }
         .onChange(of: scenePhase) { _, phase in if phase == .active { Task { await load() } } }
         .confirmationDialog("Delete this note?", isPresented: $confirmDelete) {
             Button("Delete Note", role: .destructive) {
